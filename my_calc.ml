@@ -25,8 +25,8 @@ let string_of_expr x =
   let rec print = function 
   | Num i     -> sprintf "%d" i
   | Var c     -> sprintf "%c" c
-  | Add (x,y) -> sprintf "%s + %s" (print x) (print y) 
-  | Sub (x,y) -> sprintf "%s - %s" (print x) (print y) 
+  | Add (x,y) -> sprintf "(%s + %s)" (print x) (print y) 
+  | Sub (x,y) -> sprintf "(%s - %s)" (print x) (print y) 
   | Mul (x,y) -> sprintf "%s * %s" (print x) (print y) 
   | Div (x,y) -> sprintf "%s / %s" (print x) (print y) 
   in sprintf "%s" (print x)
@@ -84,11 +84,11 @@ let eval_calc (s, e) = eval_expr (eval_assigns s) e
 let _ =
   let e0 = Num 1 in  
   let e1 = Var 'c' in
-  let e2 = Add (Mul (Num 123, Var 'x'),Num 12) in
+  let e2 = Mul (Num 2, Add (Num 3, Num 4)) in
   
-  print_expr e0;
+(*  print_expr e0;
   print_expr e1;
-  print_expr e2;
+  print_expr e2;*)
   
   let s0 = Assign ('x', e0) in
   let s1 = Assign ('c', (Mul (Num 14, Num 3))) in
